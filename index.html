@@ -84,7 +84,7 @@
         .video-wrapper {
             position: relative;
             width: 100%;
-            max-width: 1100px;
+            max-width: 800px;
             margin: 0 auto 50px;
             background: #000;
             border-radius: 16px;
@@ -104,7 +104,7 @@
             align-items: center;
             justify-content: center;
             gap: 30px;
-            max-width: 1100px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -425,11 +425,11 @@
         /* 초대형 화면 최적화 */
         @media (min-width: 1600px) {
             .video-wrapper {
-                max-width: 1200px;
+                max-width: 900px;
             }
 
             .controls {
-                max-width: 1200px;
+                max-width: 900px;
             }
         }
     </style>
@@ -450,8 +450,6 @@
                 <video 
                     id="mainVideo" 
                     controls 
-                    autoplay 
-                    muted 
                     playsinline
                 >
                     <source src="1.mp4" type="video/mp4">
@@ -535,16 +533,18 @@
             prevButton.disabled = videoNumber === 1;
             nextButton.disabled = videoNumber === totalVideos;
 
-            // 첫 번째 비디오만 자동 재생 (음소거)
+            // 첫 번째 비디오만 음소거, 나머지는 소리 켜기
             if (videoNumber === 1) {
-                mainVideo.autoplay = true;
                 mainVideo.muted = true;
             } else {
-                mainVideo.autoplay = false;
                 mainVideo.muted = false;
             }
 
+            // 비디오 로드 후 자동 재생
             mainVideo.load();
+            mainVideo.play().catch(err => {
+                console.log('자동 재생 실패:', err);
+            });
             
             // 스크롤 애니메이션
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -594,13 +594,6 @@
         // 초기화
         createIndicators();
         loadVideo(1);
-
-        // 첫 비디오 자동 재생
-        window.addEventListener('load', () => {
-            mainVideo.play().catch(err => {
-                console.log('자동 재생이 차단되었습니다.');
-            });
-        });
     </script>
 </body>
 </html>
