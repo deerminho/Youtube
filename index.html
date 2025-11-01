@@ -99,6 +99,55 @@
             display: block;
         }
 
+        /* 재생 오버레이 */
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+
+        .play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-button-large {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(45, 212, 191, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .play-overlay:hover .play-button-large {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(45, 212, 191, 0.8);
+        }
+
+        .play-button-large::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 24px solid white;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 6px;
+        }
+
         /* 컨트롤 섹션 */
         .controls {
             display: flex;
@@ -340,6 +389,17 @@
                 margin-bottom: 24px;
             }
 
+            .play-button-large {
+                width: 70px;
+                height: 70px;
+            }
+
+            .play-button-large::after {
+                border-left: 20px solid white;
+                border-top: 13px solid transparent;
+                border-bottom: 13px solid transparent;
+            }
+
             .controls {
                 gap: 16px;
             }
@@ -410,6 +470,17 @@
                 padding: 20px 12px;
             }
 
+            .play-button-large {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-button-large::after {
+                border-left: 18px solid white;
+                border-top: 11px solid transparent;
+                border-bottom: 11px solid transparent;
+            }
+
             .page-counter {
                 font-size: 20px;
             }
@@ -462,6 +533,9 @@
                 >
                     <source src="1.mp4" type="video/mp4">
                 </video>
+                <div class="play-overlay" id="playOverlay">
+                    <div class="play-button-large"></div>
+                </div>
             </div>
 
             <div class="controls">
@@ -502,6 +576,7 @@
     <script>
         const totalVideos = 17;
         let currentVideo = 1;
+        let hasPlayedOnce = false; // 첫 재생 여부 추적
 
         const mainVideo = document.getElementById('mainVideo');
         const prevButton = document.getElementById('prevButton');
@@ -511,6 +586,15 @@
         const videoSection = document.getElementById('videoSection');
         const completionScreen = document.getElementById('completionScreen');
         const restartButton = document.getElementById('restartButton');
+        const playOverlay = document.getElementById('playOverlay');
+
+        // 재생 오버레이 클릭 이벤트
+        playOverlay.addEventListener('click', () => {
+            mainVideo.muted = false; // 소리 켜기
+            mainVideo.play();
+            playOverlay.classList.add('hidden');
+            hasPlayedOnce = true;
+        });
 
         // 페이지 인디케이터 생성
         function createIndicators() {
@@ -541,14 +625,26 @@
             prevButton.disabled = videoNumber === 1;
             nextButton.disabled = videoNumber === totalVideos;
 
-            // 첫 번째 비디오는 항상 음소거, 나머지는 소리 켜기
-            mainVideo.muted = (videoNumber === 1);
+            // 오버레이 제어
+            if (videoNumber === 1 && !hasPlayedOnce) {
+                // 첫 번째 비디오이고 아직 재생하지 않았으면 오버레이 표시
+                playOverlay.classList.remove('hidden');
+                mainVideo.muted = true;
+            } else {
+                // 나머지 비디오는 오버레이 숨기고 소리 켜기
+                playOverlay.classList.add('hidden');
+                mainVideo.muted = false;
+            }
 
-            // 비디오 로드 후 자동 재생
+            // 비디오 로드
             mainVideo.load();
-            mainVideo.play().catch(err => {
-                console.log('자동 재생 실패:', err);
-            });
+            
+            // 첫 번째 비디오가 아니면 자동 재생
+            if (videoNumber !== 1 || hasPlayedOnce) {
+                mainVideo.play().catch(err => {
+                    console.log('자동 재생 실패:', err);
+                });
+            }
             
             // 스크롤 애니메이션
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -583,6 +679,7 @@
         restartButton.addEventListener('click', () => {
             videoSection.style.display = 'block';
             completionScreen.classList.remove('active');
+            hasPlayedOnce = false; // 재생 상태 리셋
             loadVideo(1);
         });
 
