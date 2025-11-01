@@ -90,12 +90,22 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 0 40px rgba(45, 212, 191, 0.4);
+            aspect-ratio: 9 / 16;
         }
 
         .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: contain;
             display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-wrapper video.loading {
+            opacity: 0;
         }
 
         /* 재생 오버레이 */
@@ -611,39 +621,47 @@
 
         // 비디오 로드
         function loadVideo(videoNumber) {
-            mainVideo.src = `${videoNumber}.mp4`;
-            currentVideo = videoNumber;
-            currentPage.textContent = videoNumber;
+            // 페이드 아웃
+            mainVideo.classList.add('loading');
             
-            // 인디케이터 업데이트
-            document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index + 1 === videoNumber);
-            });
-
-            // 버튼 상태 업데이트
-            prevButton.disabled = videoNumber === 1;
-            nextButton.disabled = videoNumber === totalVideos;
-
-            // 오버레이 제어
-            if (videoNumber === 1 && !hasPlayedOnce) {
-                // 첫 번째 비디오이고 아직 재생하지 않았으면 오버레이 표시
-                playOverlay.classList.remove('hidden');
-                mainVideo.muted = true;
-            } else {
-                // 나머지 비디오는 오버레이 숨기고 소리 켜기
-                playOverlay.classList.add('hidden');
-                mainVideo.muted = false;
-            }
-
-            // 비디오 로드
-            mainVideo.load();
-            
-            // 첫 번째 비디오가 아니면 자동 재생
-            if (videoNumber !== 1 || hasPlayedOnce) {
-                mainVideo.play().catch(err => {
-                    console.log('자동 재생 실패:', err);
+            setTimeout(() => {
+                mainVideo.src = `${videoNumber}.mp4`;
+                currentVideo = videoNumber;
+                currentPage.textContent = videoNumber;
+                
+                // 인디케이터 업데이트
+                document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index + 1 === videoNumber);
                 });
-            }
+
+                // 버튼 상태 업데이트
+                prevButton.disabled = videoNumber === 1;
+                nextButton.disabled = videoNumber === totalVideos;
+
+                // 오버레이 제어
+                if (videoNumber === 1 && !hasPlayedOnce) {
+                    // 첫 번째 비디오이고 아직 재생하지 않았으면 오버레이 표시
+                    playOverlay.classList.remove('hidden');
+                    mainVideo.muted = true;
+                } else {
+                    // 나머지 비디오는 오버레이 숨기고 소리 켜기
+                    playOverlay.classList.add('hidden');
+                    mainVideo.muted = false;
+                }
+
+                // 비디오 로드
+                mainVideo.load();
+                
+                // 첫 번째 비디오가 아니면 자동 재생
+                if (videoNumber !== 1 || hasPlayedOnce) {
+                    mainVideo.play().catch(err => {
+                        console.log('자동 재생 실패:', err);
+                    });
+                }
+                
+                // 페이드 인
+                mainVideo.classList.remove('loading');
+            }, 150);
         }
 
         // 특정 비디오로 이동
