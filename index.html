@@ -33,12 +33,12 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            gap: 20px; 
+            gap: 10px; 
         }
         .logo { 
-            flex-shrink: 0; 
             display: flex;
             align-items: center;
+            gap: 10px;
         }
         .youtube-icon {
             width: 35px;
@@ -48,7 +48,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
             box-shadow: 0 2px 10px rgba(255, 0, 0, 0.4);
         }
         .youtube-icon::before {
@@ -241,8 +240,8 @@
             text-shadow: 0 0 10px rgba(78, 237, 196, 0.5);
         }
         @media (max-width: 768px) { 
-            .header { padding: 12px 15px; gap: 12px; }
-            .youtube-icon { width: 30px; height: 30px; margin-right: 6px; }
+            .header { padding: 12px 15px; }
+            .youtube-icon { width: 30px; height: 30px; }
             .youtube-icon::before { font-size: 18px; }
             .youtube-text { font-size: 20px; }
             .slide { padding: 15px 10px; } 
@@ -259,8 +258,8 @@
         @media (max-width: 480px) { 
             body { padding: 5px; }
             .container { border-radius: 8px; }
-            .header { padding: 10px 12px; gap: 10px; }
-            .youtube-icon { width: 26px; height: 26px; margin-right: 5px; }
+            .header { padding: 10px 12px; }
+            .youtube-icon { width: 26px; height: 26px; }
             .youtube-icon::before { font-size: 16px; }
             .youtube-text { font-size: 18px; }
             .slide { padding: 10px 8px; } 
@@ -289,109 +288,24 @@
         <div class="slider-container">
             <div class="slides" id="slides">
                 
-                <!-- 슬라이드 1 (자동재생) -->
-                <div class="slide">
-                    <video id="video-1" autoplay muted playsinline preload="auto" controls>
-                        <source src="videos/1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <!-- 슬라이드 2-17 (수동재생) -->
-                <div class="slide">
-                    <video id="video-2" playsinline preload="auto" controls>
-                        <source src="videos/2.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-3" playsinline preload="auto" controls>
-                        <source src="videos/3.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-4" playsinline preload="auto" controls>
-                        <source src="videos/4.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-5" playsinline preload="auto" controls>
-                        <source src="videos/5.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-6" playsinline preload="auto" controls>
-                        <source src="videos/6.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-7" playsinline preload="auto" controls>
-                        <source src="videos/7.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-8" playsinline preload="auto" controls>
-                        <source src="videos/8.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-9" playsinline preload="auto" controls>
-                        <source src="videos/9.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-10" playsinline preload="auto" controls>
-                        <source src="videos/10.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-11" playsinline preload="auto" controls>
-                        <source src="videos/11.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-12" playsinline preload="auto" controls>
-                        <source src="videos/12.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-13" playsinline preload="auto" controls>
-                        <source src="videos/13.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-14" playsinline preload="auto" controls>
-                        <source src="videos/14.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-15" playsinline preload="auto" controls>
-                        <source src="videos/15.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-16" playsinline preload="auto" controls>
-                        <source src="videos/16.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="slide">
-                    <video id="video-17" playsinline preload="auto" controls>
-                        <source src="videos/17.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <!-- 슬라이드 1-17 -->
+                <div class="slide"><video id="video-1" muted playsinline preload="auto" controls><source src="videos/1.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-2" playsinline preload="auto" controls><source src="videos/2.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-3" playsinline preload="auto" controls><source src="videos/3.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-4" playsinline preload="auto" controls><source src="videos/4.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-5" playsinline preload="auto" controls><source src="videos/5.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-6" playsinline preload="auto" controls><source src="videos/6.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-7" playsinline preload="auto" controls><source src="videos/7.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-8" playsinline preload="auto" controls><source src="videos/8.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-9" playsinline preload="auto" controls><source src="videos/9.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-10" playsinline preload="auto" controls><source src="videos/10.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-11" playsinline preload="auto" controls><source src="videos/11.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-12" playsinline preload="auto" controls><source src="videos/12.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-13" playsinline preload="auto" controls><source src="videos/13.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-14" playsinline preload="auto" controls><source src="videos/14.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-15" playsinline preload="auto" controls><source src="videos/15.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-16" playsinline preload="auto" controls><source src="videos/16.mp4" type="video/mp4"></video></div>
+                <div class="slide"><video id="video-17" playsinline preload="auto" controls><source src="videos/17.mp4" type="video/mp4"></video></div>
                 
             </div>
         </div>
@@ -422,20 +336,18 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const progressBar = document.getElementById('progressBar');
-        const volumeControl = document.getElementById('volumeControl');
         const volumeIcon = document.getElementById('volumeIcon');
         const volumeSliderContainer = document.getElementById('volumeSliderContainer');
         const volumeFill = document.getElementById('volumeFill');
-        const volumeThumb = document.getElementById('volumeThumb');
         
         let currentVolume = 1.0;
         let isDragging = false;
         
-        // 첫 영상 자동재생 (음소거)
+        // 첫 영상 자동재생
         const firstVideo = document.getElementById('video-1');
-        firstVideo.play().catch(e => {
-            console.log('자동재생 차단됨');
-        });
+        setTimeout(() => {
+            firstVideo.play().catch(e => console.log('자동재생 대기'));
+        }, 100);
         
         // 첫 영상 클릭하면 음소거 해제
         firstVideo.addEventListener('click', function() {
@@ -445,7 +357,6 @@
             }
         }, { once: true });
         
-        // 볼륨 아이콘 업데이트
         function updateVolumeIcon(volume) {
             if (volume === 0) {
                 volumeIcon.textContent = '🔇';
@@ -456,37 +367,25 @@
             }
         }
         
-        // 볼륨 슬라이더 업데이트
         function updateVolumeSlider(volume) {
             volumeFill.style.width = (volume * 100) + '%';
             updateVolumeIcon(volume);
         }
         
-        // 현재 비디오에 볼륨 적용
         function applyVolumeToCurrentVideo(volume) {
             const currentVideo = slides[currentSlide].querySelector('video');
             if (currentVideo) {
                 currentVideo.volume = volume;
-                if (volume === 0) {
-                    currentVideo.muted = true;
-                } else {
-                    currentVideo.muted = false;
-                }
+                currentVideo.muted = (volume === 0);
             }
         }
         
-        // 볼륨 아이콘 클릭 (음소거/해제)
         volumeIcon.addEventListener('click', () => {
-            if (currentVolume > 0) {
-                currentVolume = 0;
-            } else {
-                currentVolume = 1.0;
-            }
+            currentVolume = currentVolume > 0 ? 0 : 1.0;
             updateVolumeSlider(currentVolume);
             applyVolumeToCurrentVideo(currentVolume);
         });
         
-        // 볼륨 슬라이더 드래그
         function handleVolumeChange(e) {
             const rect = volumeSliderContainer.getBoundingClientRect();
             const x = (e.type.includes('mouse') ? e.clientX : e.touches[0].clientX) - rect.left;
@@ -508,24 +407,15 @@
         });
         
         document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                handleVolumeChange(e);
-            }
+            if (isDragging) handleVolumeChange(e);
         });
         
         document.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                handleVolumeChange(e);
-            }
+            if (isDragging) handleVolumeChange(e);
         });
         
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-        
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
+        document.addEventListener('mouseup', () => isDragging = false);
+        document.addEventListener('touchend', () => isDragging = false);
         
         // 점 생성
         for (let i = 0; i < totalSlides; i++) {
@@ -547,20 +437,13 @@
             // 모든 비디오 정지
             slides.forEach((slide, index) => {
                 const video = slide.querySelector('video');
-                if (video && index !== currentSlide) {
-                    video.pause();
-                }
+                if (video && index !== currentSlide) video.pause();
             });
             
-            // 현재 슬라이드 비디오 처리
+            // 현재 비디오 볼륨 적용
             const currentVideo = slides[currentSlide].querySelector('video');
-            if (currentVideo) {
-                // 첫 번째 슬라이드는 자동재생 (이미 재생 중)
-                if (currentSlide === 0) {
-                    // 볼륨 설정 유지
-                    currentVideo.volume = currentVolume;
-                }
-                // 두 번째 이후는 수동 재생 (사용자가 재생 버튼을 눌러야 함)
+            if (currentVideo && currentSlide === 0) {
+                currentVideo.volume = currentVolume;
             }
         }
         
@@ -600,7 +483,6 @@
             if (touchEndX > touchStartX + 50) prevSlide(); 
         });
         
-        // 초기화
         updateSlider();
         updateVolumeSlider(currentVolume);
     </script>
