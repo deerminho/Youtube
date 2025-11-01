@@ -454,7 +454,7 @@
                     muted 
                     playsinline
                 >
-                    <source src="" type="video/mp4">
+                    <source src="1.mp4" type="video/mp4">
                 </video>
             </div>
 
@@ -522,7 +522,7 @@
 
         // 비디오 로드
         function loadVideo(videoNumber) {
-            mainVideo.src = `/mnt/user-data/uploads/${videoNumber}.mp4`;
+            mainVideo.src = `${videoNumber}.mp4`;
             currentVideo = videoNumber;
             currentPage.textContent = videoNumber;
             
